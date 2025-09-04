@@ -1,4 +1,8 @@
-
+// import burger from "./burger.jpg";
 import "./styles.css";
 
-console.log('hi');
+const content = document.querySelector("#content");
+const image = document.createElement("img");
+image.src = burger;
+
+content.appendChild(image);
