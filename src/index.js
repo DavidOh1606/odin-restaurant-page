@@ -1,4 +1,7 @@
 import burger from "./images/burger.jpg";
+import chicken from "./images/fried-chicken.jpg";
+import fries from "./images/fries.jpg";
+import salad from "./images/salad.jpg";
 import "./styles.css";
 
 const content = document.querySelector("#content");
@@ -11,7 +14,7 @@ nav.addEventListener("click", setSelection);
 
 function setSelection(event) {
 
-    if (event.target.classList.contains("selected") || event.target == nav) {
+    if (event.target === selection || event.target === nav) {
         return;
     }
     
@@ -21,12 +24,30 @@ function setSelection(event) {
 
     selection = event.target;
 
-    createHome(event);
+    event.target.setAttribute("selected", "true");
+
+
+    switch (event.target.id) {
+        case "home":
+            createHome();
+            break;
+        
+        case "menu":
+            createMenu();
+            break;
+
+        case "about":
+
+            break;
+
+        default:
+            return;
+
+    }
+
 }
 
-
-function createHome(event) {
-    event.target.setAttribute("selected", "true");
+function createHome() {
 
     const title = document.createElement("div");
     const image = document.createElement("img");
@@ -59,4 +80,48 @@ function createHome(event) {
     content.appendChild(hours);
 }
 
-// function create
+function createMenu(event) {
+
+    const title = document.createElement("title");
+    const chickenItem = createMenuItem("Fried Chicken", chicken, "$12.99");
+    const friesItem = createMenuItem("French Fries", fries, "$6.99");
+    const saladItem = createMenuItem("Salad", salad, "$10.99");
+
+    title.innerText = "Our Menu";
+
+    const sodaText = document.createElement("div");
+    sodaText.classList.add("soda-text");
+    sodaText.innerText = "Soft Drinks - $4.99";
+
+    content.appendChild(title);
+    content.appendChild(chickenItem);
+    content.appendChild(friesItem);
+    content.appendChild(saladItem);
+    content.appendChild(sodaText);
+
+
+
+    function createMenuItem(name, imgSrc, price) {
+        const div = document.createElement("div");
+        const nameElement = document.createElement("div");
+        const image = document.createElement("img");
+        const priceElement = document.createElement("div");
+
+        div.classList.add("menu-item");
+        nameElement.classList.add("menu-item-name");
+        nameElement.innerText = name;
+
+        image.src = imgSrc;
+        image.alt = name;
+        image.width = "450";
+
+        priceElement.classList.add("price");
+        priceElement.innerText = price;
+
+        div.appendChild(nameElement);
+        div.appendChild(image);
+        div.appendChild(priceElement);
+
+        return div;
+    }
+}
