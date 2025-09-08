@@ -11,6 +11,7 @@ const nav = document.querySelector("nav");
 let selection = null;
 
 nav.addEventListener("click", setSelection);
+createHome();
 
 function setSelection(event) {
 
@@ -26,7 +27,7 @@ function setSelection(event) {
 
     event.target.setAttribute("selected", "true");
 
-
+    clearContent();
     switch (event.target.id) {
         case "home":
             createHome();
@@ -37,7 +38,7 @@ function setSelection(event) {
             break;
 
         case "about":
-
+            createAbout();
             break;
 
         default:
@@ -82,12 +83,13 @@ function createHome() {
 
 function createMenu(event) {
 
-    const title = document.createElement("title");
+    const title = document.createElement("div");
     const chickenItem = createMenuItem("Fried Chicken", chicken, "$12.99");
     const friesItem = createMenuItem("French Fries", fries, "$6.99");
     const saladItem = createMenuItem("Salad", salad, "$10.99");
 
     title.innerText = "Our Menu";
+    title.classList.add("title");
 
     const sodaText = document.createElement("div");
     sodaText.classList.add("soda-text");
@@ -123,5 +125,35 @@ function createMenu(event) {
         div.appendChild(priceElement);
 
         return div;
+    }
+}
+
+function createAbout() {
+    const title = document.createElement("div");
+    const text = document.createElement("div");
+    const phoneNumber = document.createElement("div");
+    const email = document.createElement("div");
+
+    title.classList.add("title");
+    title.innerText = "About Us";
+
+    text.classList.add("text");
+    text.innerText = "We are passionate about creating food that's fast.";
+
+    phoneNumber.classList.add("phone-number");
+    phoneNumber.innerText = "(555)-555-5555";
+
+    email.classList.add("email");
+    email.innerText = "email@email.com";
+
+    content.appendChild(title);
+    content.appendChild(text);
+    content.appendChild(phoneNumber);
+    content.appendChild(email);
+}
+
+function clearContent() {
+    while (content.firstChild) {
+        content.firstChild.remove();
     }
 }

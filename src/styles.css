@@ -108,3 +108,7 @@ div#content {
     align-items: center;
     gap: 16px;
 }
+
+.text {
+    text-align: center;
+}
